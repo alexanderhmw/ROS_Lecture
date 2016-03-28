@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<param name="/use_sim_time" value="false"/>
+
+<node pkg="rviz" type="rviz" name="rviz"
+args="-d $(find hector_slam_launch)/rviz_cfg/mapping_demo.rviz"/>
+
+<node pkg="topic_tools" type="relay" name="relay" args="/hokuyo_laser_scan /scan"/>
+
+<include file="$(find hokuyo_test)/launch/hector_mapping.launch"/>
+
+<include file="$(find hokuyo_test)/launch/geotiff_mapper.launch">
+<arg name="trajectory_source_frame_name" value="scanmatcher_frame"/>
+</include>
+
+</launch>
